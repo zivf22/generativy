@@ -1256,8 +1256,8 @@ body[dir="rtl"] .info-main-content {
 }
 
 .btn-sidebar:hover {
-  background-color: var(--color-black);
-  color: var(--color-yellow);
+  background-color: var(--color-purple);
+  color: var(--color-black);
 }
 
 .sidebar-warning {
