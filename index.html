@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Design Festival - פסטיבל העיצוב הבינלאומי</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Top Continuous Scrolling Ticker -->
+    <div class="marquee-container" id="ticker-marquee">
+      <div class="marquee-content" id="ticker-content">
+        <!-- Will be populated dynamically by index.js to support smooth looping in LTR/RTL -->
+      </div>
+    </div>
+
+    <!-- 12-Column Grid Navbar -->
+    <nav class="navbar-grid" id="main-navbar">
+      <!-- Languages (Columns 1-2) -->
+      <div class="nav-item lang-switch">
+        <button class="lang-btn" data-lang="ar">جا</button>
+        <button class="lang-btn active" data-lang="he">עב</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+
+      <!-- Navigation Tabs (Columns 3-12) -->
+      <a class="nav-item tab-link" data-tab="map" id="nav-map">מפה</a>
+      <a class="nav-item tab-link" data-tab="poster-builder" id="nav-poster">יצירת פוסטר</a>
+      <a class="nav-item tab-link active" data-tab="home" id="nav-theme">מסורת בעידן הטכנולוגי</a>
+      <a class="nav-item tab-link" data-tab="home" id="nav-home" style="display: none;">דף הבית</a> <!-- Hidden tab for home -->
+      <a class="nav-item tab-link" data-tab="events" id="nav-events">אירועים</a>
+      <a class="nav-item tab-link" data-tab="info" id="nav-info">מידע</a>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main>
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- Page 1: Home (Default View) -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="page-home" class="page-content active">
+        <div class="home-container" id="home-interactive-hero" style="cursor: pointer;">
+          <!-- Interactive p5.js Kaleidoscope Canvas Container -->
+          <div id="home-canvas-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;"></div>
+          <!-- Overlaid Graphic Text (assets/image 6.png) -->
+          <div class="home-logo-overlay">
+            <img src="assets/image 6.png" alt="International Design Festival Logo" id="logo-overlay-img">
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- Page 3: Poster Builder -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="page-poster-builder" class="page-content">
+        <div class="poster-container">
+          <!-- Canvas drawing area -->
+          <div class="poster-canvas-area">
+            <div class="canvas-border-box">
+              <canvas class="poster-canvas" id="canvas-drawing" width="480" height="480"></canvas>
+            </div>
+          </div>
+          
+          <!-- Control Panel -->
+          <div class="poster-controls-area">
+            <div class="poster-description-text">
+              <h2 id="poster-title">יצירת פוסטר פסטיבל</h2>
+              <p id="poster-desc-1">במשך מאות שנים תרבויות שונות השתמשו בדוגמאות, אריגים ופסיפסים כדי לספר את סיפורן. עכשיו תורכם ליצור דפוס חדש ולהוסיף את הסיפור שלכם לפסיפס העולמי.</p>
+              <p id="poster-desc-2"><strong>צרו. חקרו. שתפו.</strong></p>
+              <p id="poster-desc-3">ציירו על הלוח משמאל. המערכת תיישם סימטריה מעגלית של 8 כיוונים בזמן אמת כדי ליצור דפוסים מרהיבים, המשלבים בין מסורת עתיקה לביטוי דיגיטלי.</p>
+              <p id="poster-desc-4" style="margin-top: 15px; font-weight: 700;">כל דפוס מתחיל בקו אחד - כל מסורת מתחילה בסיפור אחד.</p>
+            </div>
+            
+            <div class="poster-action-buttons">
+              <button class="btn-poster" id="btn-canvas-reset">איפוס</button>
+              <button class="btn-poster" id="btn-canvas-save">המשך</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- Page 3.5: Poster Print -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="page-poster-print" class="page-content">
+        <div class="print-container">
+          <!-- Left Sidebar (Yellow background) -->
+          <div class="print-sidebar">
+            <h2 id="print-sidebar-title">הדפסה</h2>
+            
+            <div class="print-options">
+              <div class="print-field">
+                <span class="print-field-label" id="label-print-dest">יעד</span>
+                <select id="print-dest" class="print-select">
+                  <option>HP printer 3425</option>
+                  <option>Save as PDF</option>
+                </select>
+              </div>
+              
+              <div class="print-field">
+                <span class="print-field-label" id="label-print-copies">עותקים</span>
+                <select id="print-copies" class="print-select">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              
+              <div class="print-field">
+                <span class="print-field-label" id="label-print-color">צבע</span>
+                <select id="print-color" class="print-select">
+                  <option>צבע</option>
+                  <option>שחור לבן</option>
+                </select>
+              </div>
+              
+              <div class="print-field">
+                <span class="print-field-label" id="label-print-pages">דפים</span>
+                <select id="print-pages" class="print-select">
+                  <option>הכל</option>
+                  <option>מותאם אישית</option>
+                </select>
+              </div>
+              
+              <div class="print-field">
+                <span class="print-field-label" id="label-print-layout">פריסה</span>
+                <select id="print-layout" class="print-select">
+                  <option>לאורך</option>
+                  <option>לרוחב</option>
+                </select>
+              </div>
+              
+              <hr class="print-divider">
+              
+              <div class="print-more-settings" id="print-more-settings-btn">
+                <span id="label-print-more">הגדרות נוספות</span>
+                <span class="settings-arrow">▼</span>
+              </div>
+            </div>
+            
+            <div class="print-action-buttons">
+              <button class="btn-print-action print" id="btn-print-submit">הדפס</button>
+              <button class="btn-print-action cancel" id="btn-print-cancel">ביטול</button>
+            </div>
+          </div>
+          
+          <!-- Right Preview Area (White background) -->
+          <div class="print-preview-area">
+            <div class="poster-preview-wrapper">
+              <!-- Background template Frame 47.png -->
+              <img src="assets/Frame 47.png" alt="Poster Template" class="poster-template-img">
+              <!-- Overlay user's drawing canvas representation -->
+              <div class="poster-drawing-overlay">
+                <canvas id="canvas-print-overlay" width="480" height="480"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- Page 4: Theme (Tradition in the Tech Era) -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="page-theme" class="page-content">
+        <div class="theme-container">
+          <!-- Headline column -->
+          <div class="theme-headline-col">
+            <div class="theme-headline-text">
+              <h1 id="theme-page-title">מסורת בעידן הטכנולוגי</h1>
+              <p id="theme-page-subtitle" style="font-weight: 700;">שבוע העיצוב הבינלאומי בירושלים 2026</p>
+            </div>
+            <div class="theme-headline-pattern"></div>
+          </div>
+          
+          <!-- Content column -->
+          <div class="theme-content-col">
+            <p class="theme-paragraph" id="theme-p1">בעולם שבו הטכנולוגיה מתפתחת בקצב מסחרר, כיצד אנו שומרים על החיבור למסורות, לשפות, לאריגה וליצירה הידנית שהגדירו קהילות ותרבויות במשך מאות שנים? הפסטיבל השנה מתמקד בנקודת המפגש המרתקת שבין העבר הפיזי לעתיד הדיגיטלי.</p>
+            
+            <blockquote class="theme-quote" id="theme-quote-text">
+              "הטכנולוגיה אינה מחליפה את המסורת; היא מעניקה לה כלים חדשים להיזכר, להתרחב ולהישמר לדורות הבאים."
+            </blockquote>
+            
+            <p class="theme-paragraph" id="theme-p2">מעצבים, אמנים וחוקרים מציגים השנה עבודות המפרשות מחדש טכניקות מסורתיות כמו אריגת שטיחים, קליגרפיה, הדפס ידני ופסיפס אבן, תוך שימוש באלגוריתמים של בינה מלאכותית, סריקה תלת-ממדית וממשקי ציור אינטראקטיביים. אנו מזמינים אתכם לחקור את התערוכות, להצטרף לשיח, ולקחת חלק בעיצוב הזיכרון התרבותי של מחר.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- Page 5: Events (List & Accordion Table) -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="page-events" class="page-content">
+        <div class="events-container">
+          <!-- Table Header -->
+          <div class="events-table-header">
+            <div class="events-header-cell" id="th-tag">
+              <select id="filter-select-tag" class="header-filter-select"></select>
+            </div>
+            <div class="events-header-cell no-sort" id="th-location">
+              <span id="label-th-location">מיקום</span>
+            </div>
+            <div class="events-header-cell no-sort" id="th-time">
+              <span id="label-th-time">שעה</span>
+            </div>
+            <div class="events-header-cell" id="th-date">
+              <select id="filter-select-date" class="header-filter-select"></select>
+            </div>
+            <div class="events-header-cell no-sort" id="th-name" style="grid-column: span 4;">
+              <span id="label-th-name">שם</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Events Rows Container -->
+          <div id="events-rows-container">
+            <!-- Populated dynamically by index.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- Page 6: Information -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="page-info" class="page-content">
+        <div class="info-container">
+          <!-- Main Content -->
+          <div class="info-main-content">
+            <!-- Section 1: Opening Hours -->
+            <div class="info-section">
+              <h2 id="info-hours-title">שעות פתיחה</h2>
+              <div class="opening-hours-list" id="info-hours-list">
+                <div class="opening-hours-row">
+                  <span>1.7 ערב הפתיחה</span>
+                  <span>17:00 - 23:00</span>
+                </div>
+                <div class="opening-hours-row">
+                  <span>2.7 יום חמישי</span>
+                  <span>10:00 - 22:00</span>
+                </div>
+                <div class="opening-hours-row">
+                  <span>3.7 יום שישי</span>
+                  <span>10:00 - 16:00</span>
+                </div>
+                <div class="opening-hours-row">
+                  <span>4.7 יום שבת</span>
+                  <span style="font-weight: bold; color: var(--color-purple);">סגור</span>
+                </div>
+                <div class="opening-hours-row">
+                  <span>5-6.7 ראשון-שני</span>
+                  <span>10:00 - 22:00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Location -->
+            <div class="info-section">
+              <h2 id="info-location-title">מיקום</h2>
+              <p id="info-location-desc1">בית הנסן, רחוב גדליהו אלון 14, ירושלים.</p>
+              <p id="info-location-desc2">קווי תחבורה ציבורית קרובים: 13, 18, 85.</p>
+              <p id="info-location-desc3">חפשו בתוכנות הניווט (Waze / Google Maps): <strong>בית הנסן</strong>.</p>
+            </div>
+
+            <!-- Section 3: Opening Evening Details -->
+            <div class="info-section">
+              <h2 id="info-opening-title">ערב פתיחה, יום רביעי, ה-1 ביולי</h2>
+              <p id="info-opening-p1">17:00 - פתיחת שבוע העיצוב לקהל הרחב. בערב הפתיחה, לצד חשיפת התערוכות, המיצבים והחוויות האינטראקטיביות, יהפוך מתחם הפסטביל למרחב חי של תרבות, עיצוב וטכנולוגיה.</p>
+              <p id="info-opening-p2">ברחבי המתחם יתקיימו מופעי מוזיקה חיה המשלבים צלילים מסורתיים ועכשוויים, מיצגי אור והקרנות דיגיטליות בהשראת דפוסים ותרבויות מרחבי העולם, ועמדות יצירה אינטראקטיביות שבהן יוכלו המבקרים ליצור דפוסים אישיים ולהפוך אותם לפוסטרים ייחודיים.</p>
+              <p id="info-opening-p3">לאורך הערב יתקיימו מיצגים חיים של אמנים ומעצבים, סדנאות פתוחות לקהל, מופעי מחול המשלבים מסורת וחדשנות, וחוויות טכנולוגיות שיציגו דרכים חדשות לשימור והצגת מורשת תרבותית. בנוסף, יפעלו ברחבי המתחם מתחמי אוכל ומשקאות בהשראת מטבחים ותרבויות שונות מרחבי העולם.</p>
+              <p id="info-opening-p4" style="font-weight: 700;">כמיטב מסורת הפסטיבל, ייחתם הערב במופע מרכזי חגיגי שיפגיש בין עבר, הווה ועתיד.</p>
+            </div>
+
+            <!-- Section 4: Accessibility -->
+            <div class="info-section">
+              <h2 id="info-accessibility-title">נגישות</h2>
+              <p id="info-accessibility-desc1">התערוכות בשבוע העיצוב יונגשו לקהל הרחב. עם זאת, בשל אופי המבנים ההיסטוריים בהם מוקמות התערוכות, ייתכנו מקומות נקודתיים בהם הנגישות תהיה מוגבלת, אנא עקבו אחר השילוט המקומי במקום.</p>
+              <p id="info-accessibility-desc2">כל המידע המלא בנושא נגישות מופיע באתר שבוע העיצוב ובפרסומים. החניה נגישה ואפשרית בחניון הרכבת הראשונה, חניון גן הפעמון וברחובות הסמוכים לבית הנסן.</p>
+            </div>
+
+            <!-- Section 5: Contact -->
+            <div class="info-section">
+              <h2 id="info-contact-title">צרו קשר</h2>
+              <div class="contact-links-row">
+                <a href="mailto:info@designfestival.org.il" class="contact-link">אימייל</a>
+                <a href="https://facebook.com" target="_blank" class="contact-link">פייסבוק</a>
+                <a href="https://instagram.com" target="_blank" class="contact-link">אינסטגרם</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sticky Yellow Sidebar -->
+          <div class="info-sidebar">
+            <div class="sidebar-card">
+              <div class="sidebar-text" id="sb-card1-text">ההשתתפות בכל האירועים ללא תשלום ובהזמנת כרטיסים מראש.</div>
+              <a href="#" class="btn-sidebar" id="sb-card1-btn">
+                <span>↖</span>
+                <span id="sb-card1-btn-text">קישור לרכישת כרטיסים</span>
+              </a>
+            </div>
+            
+            <div class="sidebar-card">
+              <div class="sidebar-text" id="sb-card2-text">הרשמה להרצאות וסדנאות יש לבצע בחלונית האירועים.</div>
+              <a href="#events" class="btn-sidebar" id="sb-card2-btn">
+                <span>↖</span>
+                <span id="sb-card2-btn-text">מעבר לחלונית האירועים</span>
+              </a>
+            </div>
+
+            <div class="sidebar-warning" id="sb-warning-text">שימו לב כי מספר המקומות מוגבל!</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ------------------------------------------------------------- -->
+    <!-- Interactive Modal: Seat/Event Registration -->
+    <!-- ------------------------------------------------------------- -->
+    <div class="modal-overlay" id="registration-modal">
+      <div class="modal-box">
+        <button class="modal-close" id="btn-modal-close">&times;</button>
+        <div id="modal-form-state">
+          <h3 class="modal-title" id="modal-reg-title">הרשמה לאירוע</h3>
+          <p id="modal-event-display" style="font-weight: 700; color: var(--color-purple); margin-bottom: 15px;"></p>
+          <form id="event-reg-form" onsubmit="event.preventDefault();">
+            <div class="form-group">
+              <label class="form-label" for="reg-name" id="lbl-reg-name">שם מלא</label>
+              <input type="text" id="reg-name" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-email" id="lbl-reg-email">כתובת אימייל</label>
+              <input type="email" id="reg-email" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-tickets" id="lbl-reg-tickets">מספר כרטיסים</label>
+              <input type="number" id="reg-tickets" class="form-input" min="1" max="4" value="1" required>
+            </div>
+            <button type="submit" class="btn-submit" id="btn-reg-submit">שלח הרשמה</button>
+          </form>
+        </div>
+        
+        <!-- Success State -->
+        <div class="modal-success-state" id="modal-success-state">
+          <h3 id="modal-success-title">הרשמתך התקבלה בהצלחה!</h3>
+          <p id="modal-success-desc">אישור הרשמה וכרטיסי כניסה דיגיטליים נשלחו לכתובת האימייל שהזנת.</p>
+          <button class="btn-submit" id="btn-modal-success-close">סגור</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="index.js?v=27"></script>
+</body>
+</html>
