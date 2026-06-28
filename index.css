@@ -8,9 +8,9 @@
 :root {
   /* Colors */
   --color-yellow: #FFE101;
-  --color-purple: #9532FC;
-  --color-purple-20: rgba(149, 50, 252, 0.20);
-  --color-purple-6: rgba(149, 50, 252, 0.06);
+  --color-purple: #8a38f5;
+  --color-purple-20: rgba(138, 56, 245, 0.20);
+  --color-purple-6: rgba(138, 56, 245, 0.06);
   --color-black: #000000;
   --color-white: #FFFFFF;
 
@@ -1253,6 +1253,7 @@ body[dir="rtl"] .info-main-content {
   font-weight: 800;
   font-size: var(--text-sm);
   transition: all 0.2s ease;
+  direction: ltr; /* Always place text on the left, arrow on the right */
 }
 
 .btn-sidebar:hover {

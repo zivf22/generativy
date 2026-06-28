@@ -1320,7 +1320,7 @@ function setSymmetricalPixels(r, c, val) {
 
 function drawCanvasState(ctx) {
   const N = gridSize;
-  const purpleColor = '#9532FC';
+  const purpleColor = '#8a38f5';
   const yellowColor = '#FFE101';
 
   const canvasWidth = ctx.canvas.width;
